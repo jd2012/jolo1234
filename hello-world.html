@@ -56,7 +56,145 @@ myButton.addEventListener('click', doSomething, false)
 function doSomething() {
 	myText.textContent = "What are we doing?";
 }
+
+	<h1>Welcome</h1>
+<h2>To My portfolio</h2>
+<canvas id="canvas"></canvas>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <filter id="goo">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
+    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 60 -9"/>
+  </filter>
+</svg>
+<script>window.onload = function(){
+  
+  var canvas = document.getElementById("canvas"),
+      ctx = canvas.getContext("2d");
+
+  var w = canvas.width = window.innerWidth;
+  var h = canvas.height = window.innerHeight;
+
+  var numParticles = 50,
+      particles = [],
+      radius = 12,
+      speed = 0.1;
+
+  function randomize(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+  };
+
+  var pos = {
+    x: w/2,
+    y: h/2
+  };
+
+  var colors = ["#e67e22", "#e74c3c", "blue"];
+
+  // clone object pos
+  var accel = JSON.parse(JSON.stringify(pos));
+
+  document.body.addEventListener("mousemove", function(e){
+    pos.x = e.clientX;
+    pos.y = e.clientY;
+  });
+
+  for(var i = 0; i < numParticles; i++){
+    particles.push(new generate());
+  };
+
+  function generate(){
+    this.x = pos.x;
+    this.y = pos.y;
+    this.radius = randomize(3,6);
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.vx = randomize(-2, 2);
+    this.vy = randomize(5, 10);
+    this.life = randomize(20, 30);
+  };
+
+  render();
+
+  function render(){
+    ctx.clearRect(0, 0, w, h);
+
+    accel.x += (pos.x - accel.x) * 0.15;
+    accel.y += (pos.y - accel.y) * 0.15;
+
+    ctx.beginPath();
+    ctx.fillStyle = "#f1c40f";
+    ctx.arc(accel.x, accel.y, radius, 0, Math.PI * 2, false);
+    ctx.fill();
+    ctx.globalCompositeOperation = "xor";
+
+    for(var j = 0; j < particles.length; j++){
+      var p = particles[j];
+
+      ctx.beginPath();
+      ctx.fillStyle = p.color;
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+      ctx.fill();
+
+      p.x += p.vx;
+      p.y -= p.vy;
+
+      p.radius -= 0.075;
+      p.life--;
+
+      if(p.life < 0 || p.radius < 0){
+        particles[j] = new generate();
+      }
+
+    }
+
+    requestAnimationFrame(render);
+  }
+
+  // credit
+  balapaCop("Elastic Fire", "rgba(255,255,255,.5)");
+  
+}
 </script>
+<style>@import "bourbon";
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700);
+
+body {
+  overflow: hidden;
+  background: #191747;
+}
+
+svg {
+  pointer-events: none;
+  @include position(fixed, 0 x x 0);
+	
+}
+
+#canvas {
+  -webkit-filter: url("#goo");
+	filter: url("#goo");
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+  font-family: Quicksand;
+  letter-spacing: 10px;
+  font-size: 20px;
+  text-transform: uppercase;
+  @include position(fixed, 100px 0 x 0);
+}
+h2 {
+  color: #fff;
+  text-align: center;
+  font-family: Quicksand;
+  letter-spacing: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  @include position(fixed, 125px 0 x 0);
+}
+</style>
+></div>
+<iframe height='265' scrolling='no' src='//codepen.io/soulwire/embed/Ffvlo/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/soulwire/pen/Ffvlo/'>30,000 Particles</a> by Justin Windle (<a href='http://codepen.io/soulwire'>@soulwire</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
 
 </body>
 </html>

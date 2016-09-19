@@ -1,24 +1,5 @@
-<!DOCTYPE html>
-<!-- HTML5 Hello world by kirupa - http://www.kirupa.com/html5/getting_your_feet_wet_html5_pg1.htm -->
-<html lang="en-us">
-
-<head>
-    <title>Hello...</title>
-    <h1>What are we doing?</h1>
-    <h6>Somebody help me</h6>
-    <h10>please</h10>
-</head>
-
-    <body translate="no">
-
-    <canvas height="400" width="600" id="canv"></canvas>
-<!-- 
-Mouseover | TouchSwipe to intensify effect. 
-!-->
-    
-    
-        <script>
-      document.ready(function(){
+var img = new Image(600,400);
+document.ready(function(){
   var c = document.getElementById('canv');
   var $ = c.getContext('2d');
   c.width = 600; c.height = 400; 
@@ -26,7 +7,8 @@ Mouseover | TouchSwipe to intensify effect.
   var w = 0, h = 0;
   
   var img = new Image();
-  img.src = 404.png;
+  img.src = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/131045/404.png';
+  img;
   
   var set = function(){
     var run, _h, _w, dx, a;
@@ -65,10 +47,3 @@ Mouseover | TouchSwipe to intensify effect.
     return ms = false;
   }, false);
 }());
-      //# sourceURL=pen.js
-    </script>
-
-</body>
-
-
-</html>
