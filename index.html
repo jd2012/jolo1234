@@ -21,10 +21,10 @@ var s = document.getElementsByTagName('script')[0];
   var w = canvas.width = window.innerWidth;
   var h = canvas.height = window.innerHeight;
 
-  var numParticles = 50,
+  var numParticles = 500,
       particles = [],
       radius = .5,
-      speed = 0.01;
+      speed = 1;
 
   function randomize(min, max) {
     return Math.round(Math.random() * (max - min) + min);
@@ -54,9 +54,9 @@ var s = document.getElementsByTagName('script')[0];
     this.y = pos.y;
     this.radius = randomize(3,6);
     this.color = colors[Math.floor(Math.random() * colors.length)];
-    this.vx = randomize(-2, 2);
-    this.vy = randomize(5, 25);
-    this.life = randomize(2, 30);
+    this.vx = randomize(-15, 15);
+    this.vy = randomize(-15, 15);
+    this.life = randomize(2, 10);
   };
 
   render();
@@ -64,12 +64,12 @@ var s = document.getElementsByTagName('script')[0];
   function render(){
     ctx.clearRect(0, 0, w, h);
 
-    accel.x += (pos.x - accel.x) * 0.15;
-    accel.y += (pos.y - accel.y) * 0.15;
+    accel.x += (pos.x - accel.x) * 0.00005;
+    accel.y += (pos.y - accel.y) * 0.00005;
 
     ctx.beginPath();
     ctx.fillImage = "#f1c40f";
-    ctx.arc(accel.x, accel.y, radius, 0, Math.PI * 2, false);
+    ctx.arc(accel.x, accel.y, radius, 5, Math.PI * 2, false);
     ctx.fill();
     ctx.globalCompositeOperation = "xor";
 
@@ -179,7 +179,7 @@ a {
     color:#fff;
 }
 gcse:search {
-  text-align: right;
+  text-transform:capitalize;
 }
 h3
 {
