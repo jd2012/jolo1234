@@ -104,7 +104,8 @@ var s = document.getElementsByTagName('script')[0];
 
 
        <div>
-          <nav><a href="index.html">Home</a> <a href="portfolio.html"> Portfolio</a><gcse:search></gcse:search>
+          <nav><a href="index.html">Home</a> <a href="portfolio.html"> Portfolio</a> <a id="login" href="login.html"> Login</a>
+		  <gcse:search></gcse:search>
           </nav>
           <h1>Welcome</h1>
          <h3>To My</h3>
@@ -181,8 +182,7 @@ a {
 gcse:search {
   text-transform:capitalize;
 }
-h3
-{
+h3{
   color: #fff;
   text-align: center;
   font-family: Quicksand;
@@ -190,6 +190,9 @@ h3
   font-size: 8px;
   text-transform: uppercase;
   @include position(fixed, 110px x 0 x 0);
+}
+.login {
+  text-align: right;
 }
 </style>
     </body>
